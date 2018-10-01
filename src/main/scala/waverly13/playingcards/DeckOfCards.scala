@@ -1,36 +1,37 @@
 package waverly13.playingcards
 
-import org.apache.logging.log4j
+import org.apache.logging.log4j.scala.Logging
 
-import scala.collection.mutable.ListBuffer
+import scala.collection.mutable.ArrayBuffer
 import scala.util.Random
 
 /**
   * Holds the ordered list of cards that make up the deck
-  * @param deck: ListBuffer[Card] the ordered list of cards
   */
-class DeckOfCards(var deck: ListBuffer[Card] = ListBuffer()) {
+class DeckOfCards() extends Logging {
 
-  private val log = log4j.LogManager.getLogger(getClass.getName)
+  /**
+    * the ordered list of cards
+    */
+  var deck: ArrayBuffer[Card] = ArrayBuffer()
 
-  for (suite <- Suit.values) {
-    for (face <- Face.values) {
-      val card = Card(suite, face)
-      deck += card
-    }
-  }
-  log.debug("Created a DeckOfCards")
+  Suit.values.foreach(suite =>
+    Face.values.foreach(face =>
+      deck += Card(suite, face)
+    )
+  )
+  logger.debug("Created a DeckOfCards")
 
   /**
     * Randomly reorders the deck of cards
     */
   def shuffle(): Unit = {
     val random: Random = new scala.util.Random
-    val newDeck: ListBuffer[Card] = ListBuffer()
+    val newDeck: ArrayBuffer[Card] = ArrayBuffer()
     for (i <- deck.length until 0 by -1) {
       newDeck += deck.remove(random.nextInt(i))
     }
-    log.debug("Deck shuffled")
+    logger.debug("Deck shuffled")
     deck = newDeck
   }
 
@@ -40,11 +41,11 @@ class DeckOfCards(var deck: ListBuffer[Card] = ListBuffer()) {
     */
   def dealOneCard(): Option[Card] = {
     try {
-      log.debug(s"One card dealt, ${deck.length} remaining")
+      logger.debug(s"One card dealt, ${deck.length} remaining")
       Some(deck.remove(0))
     } catch {
       case e: IndexOutOfBoundsException =>
-        log.info("Tried to deal a card from an empty deck", e)
+        logger.info("Tried to deal a card from an empty deck", e)
         None
     }
   }

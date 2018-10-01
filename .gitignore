@@ -1,6 +1,7 @@
 # SBT (Simple Build Tool)
 
 target/
+*.log
 
 # Intellij
 

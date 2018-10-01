@@ -17,14 +17,12 @@ class DeckOfCardsTest extends FlatSpec with Matchers {
     var hearts: Int = 0
     var diamonds: Int = 0
 
-    for (card <- deckOfCards.deck) {
-      card.suit match {
-        case Suit.Clubs => clubs += 1
-        case Suit.Spades => spades += 1
-        case Suit.Hearts => hearts += 1
-        case Suit.Diamonds => diamonds += 1
-      }
-    }
+    deckOfCards.deck.foreach(card => card.suit match {
+      case Suit.Clubs => clubs += 1
+      case Suit.Spades => spades += 1
+      case Suit.Hearts => hearts += 1
+      case Suit.Diamonds => diamonds += 1
+    })
 
     clubs shouldBe 13
     spades shouldBe 13
@@ -38,6 +36,7 @@ class DeckOfCardsTest extends FlatSpec with Matchers {
     deckOfCards.shuffle()
     val shuffledDeck = deckOfCards.deck.clone()
     originalDeck shouldNot be(shuffledDeck)
+    shuffledDeck.length shouldBe 52
   }
 
   it should "result in two different shuffles when identical decks are shuffled" in {
@@ -55,15 +54,15 @@ class DeckOfCardsTest extends FlatSpec with Matchers {
   it should "be able to deal one card" in {
     val deckOfCards: DeckOfCards = new DeckOfCards()
     val card: Option[Card] = deckOfCards.dealOneCard()
+    card.isDefined shouldBe true
     card.get.suit shouldBe Suit.Hearts
     card.get.face shouldBe Face.Ace
+    deckOfCards.deck.length shouldBe 51
   }
 
   it should "return no card if the deck is empty" in {
     val deckOfCards: DeckOfCards = new DeckOfCards()
-    for (i <- 0 to 52) {
-      deckOfCards.dealOneCard()
-    }
+    (0 to 51).foreach(_ => deckOfCards.dealOneCard())
     val card = deckOfCards.dealOneCard()
     card.isEmpty shouldBe true
   }

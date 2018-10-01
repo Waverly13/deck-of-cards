@@ -7,12 +7,15 @@ package waverly13.playingcards
   */
 case class Card(suit: Suit.Value, face: Face.Value) {
 
+  require(suit != null, "Suit can not be null")
+  require(face != null, "Face can not be null")
+
   override def toString: String = face + " of " + suit
 
 }
 
 /**
-  * Enumeration of the possible suites in a deck of cards
+  * Enumeration of the possible suits in a deck of cards
   */
 object Suit extends Enumeration {
   type Suit = Value

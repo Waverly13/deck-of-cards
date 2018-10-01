@@ -51,4 +51,14 @@ class CardTest extends FlatSpec with Matchers {
     king.face shouldBe Face.King
   }
 
+  it should "throw an IllegalArgumentException if null is passed in" in {
+    assertThrows[IllegalArgumentException] {
+      Card(null, Face.Ace)
+    }
+    assertThrows[IllegalArgumentException] {
+      Card(Suit.Clubs, null)
+    }
+  }
+
+
 }
