@@ -1,21 +1,21 @@
 package waverly13.playingcards
 
 /**
-  * A single playing card, made up of its suite and face value
-  * @param suite the suite of the card
-  * @param face the face value of the card
+  * A single playing card, made up of its suit and face value
+  * @param suit: [[waverly13.playingcards.Suit]] the suite of the card
+  * @param face: [[waverly13.playingcards.Card]] the face value of the card
   */
-case class Card(suite: Suite.Value, face: Face.Value) {
+case class Card(suit: Suit.Value, face: Face.Value) {
 
-  override def toString: String = face + " of " + suite
+  override def toString: String = face + " of " + suit
 
 }
 
 /**
   * Enumeration of the possible suites in a deck of cards
   */
-object Suite extends Enumeration {
-  type Suite = Value
+object Suit extends Enumeration {
+  type Suit = Value
   val Hearts, Spades, Clubs, Diamonds = Value
 }
 

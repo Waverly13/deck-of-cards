@@ -4,7 +4,6 @@ import org.scalatest._
 
 class DeckOfCardsTest extends FlatSpec with Matchers {
 
-
   "A deck" should "have 52 cards" in {
     val deckOfCards: DeckOfCards = new DeckOfCards()
     deckOfCards.deck.length shouldBe 52
@@ -19,11 +18,11 @@ class DeckOfCardsTest extends FlatSpec with Matchers {
     var diamonds: Int = 0
 
     for (card <- deckOfCards.deck) {
-      card.suite match {
-        case Suite.Clubs => clubs += 1
-        case Suite.Spades => spades += 1
-        case Suite.Hearts => hearts += 1
-        case Suite.Diamonds => diamonds += 1
+      card.suit match {
+        case Suit.Clubs => clubs += 1
+        case Suit.Spades => spades += 1
+        case Suit.Hearts => hearts += 1
+        case Suit.Diamonds => diamonds += 1
       }
     }
 
@@ -56,7 +55,7 @@ class DeckOfCardsTest extends FlatSpec with Matchers {
   it should "be able to deal one card" in {
     val deckOfCards: DeckOfCards = new DeckOfCards()
     val card: Option[Card] = deckOfCards.dealOneCard()
-    card.get.suite shouldBe Suite.Hearts
+    card.get.suit shouldBe Suit.Hearts
     card.get.face shouldBe Face.Ace
   }
 
