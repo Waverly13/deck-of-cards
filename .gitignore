@@ -1,0 +1,7 @@
+# SBT (Simple Build Tool)
+
+target/
+
+# Intellij
+
+.idea/
