@@ -9,7 +9,7 @@ class DeckOfCardsTest extends FlatSpec with Matchers {
     deckOfCards.deck.length shouldBe 52
   }
 
-  it should "have the correct number of cards per suite" in {
+  it should "have the correct number of cards per suit" in {
     val deckOfCards: DeckOfCards = new DeckOfCards()
 
     var clubs: Int = 0
