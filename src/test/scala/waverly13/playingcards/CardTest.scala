@@ -10,45 +10,26 @@ class CardTest extends FlatSpec with Matchers {
   }
 
   it should "be able to have all 4 suits" in {
-    val spade = Card(Suit.Spades, Face.Ace)
-    val club = Card(Suit.Clubs, Face.Ace)
-    val heart = Card(Suit.Hearts, Face.Ace)
-    val diamond = Card(Suit.Diamonds, Face.Ace)
-
-    spade.suit shouldBe Suit.Spades
-    club.suit shouldBe Suit.Clubs
-    heart.suit shouldBe Suit.Hearts
-    diamond.suit shouldBe Suit.Diamonds
+    Card(Suit.Spades, Face.Ace).suit shouldBe Suit.Spades
+    Card(Suit.Clubs, Face.Ace).suit shouldBe Suit.Clubs
+    Card(Suit.Hearts, Face.Ace).suit shouldBe Suit.Hearts
+    Card(Suit.Diamonds, Face.Ace).suit shouldBe Suit.Diamonds
   }
 
   it should "have all possible faces" in {
-    val ace = Card(Suit.Spades, Face.Ace)
-    val two = Card(Suit.Spades, Face.Two)
-    val three = Card(Suit.Spades, Face.Three)
-    val four = Card(Suit.Spades, Face.Four)
-    val five = Card(Suit.Spades, Face.Five)
-    val six = Card(Suit.Spades, Face.Six)
-    val seven = Card(Suit.Spades, Face.Seven)
-    val eight = Card(Suit.Spades, Face.Eight)
-    val nine = Card(Suit.Spades, Face.Nine)
-    val ten = Card(Suit.Spades, Face.Ten)
-    val jack = Card(Suit.Spades, Face.Jack)
-    val queen = Card(Suit.Spades, Face.Queen)
-    val king = Card(Suit.Spades, Face.King)
-
-    ace.face shouldBe Face.Ace
-    two.face shouldBe Face.Two
-    three.face shouldBe Face.Three
-    four.face shouldBe Face.Four
-    five.face shouldBe Face.Five
-    six.face shouldBe Face.Six
-    seven.face shouldBe Face.Seven
-    eight.face shouldBe Face.Eight
-    nine.face shouldBe Face.Nine
-    ten.face shouldBe Face.Ten
-    jack.face shouldBe Face.Jack
-    queen.face shouldBe Face.Queen
-    king.face shouldBe Face.King
+    Card(Suit.Spades, Face.Ace).face shouldBe Face.Ace
+    Card(Suit.Spades, Face.Two).face shouldBe Face.Two
+    Card(Suit.Spades, Face.Three).face shouldBe Face.Three
+    Card(Suit.Spades, Face.Four).face shouldBe Face.Four
+    Card(Suit.Spades, Face.Five).face shouldBe Face.Five
+    Card(Suit.Spades, Face.Six).face shouldBe Face.Six
+    Card(Suit.Spades, Face.Seven).face shouldBe Face.Seven
+    Card(Suit.Spades, Face.Eight).face shouldBe Face.Eight
+    Card(Suit.Spades, Face.Nine).face shouldBe Face.Nine
+    Card(Suit.Spades, Face.Ten).face shouldBe Face.Ten
+    Card(Suit.Spades, Face.Jack).face shouldBe Face.Jack
+    Card(Suit.Spades, Face.Queen).face shouldBe Face.Queen
+    Card(Suit.Spades, Face.King).face shouldBe Face.King
   }
 
   it should "throw an IllegalArgumentException if null is passed in" in {
@@ -59,6 +40,5 @@ class CardTest extends FlatSpec with Matchers {
       Card(Suit.Clubs, null)
     }
   }
-
 
 }
