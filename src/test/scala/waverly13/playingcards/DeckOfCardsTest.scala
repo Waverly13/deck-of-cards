@@ -55,8 +55,6 @@ class DeckOfCardsTest extends FlatSpec with Matchers {
     val deckOfCards: DeckOfCards = new DeckOfCards()
     val card: Option[Card] = deckOfCards.dealOneCard()
     card.isDefined shouldBe true
-    card.get.suit shouldBe Suit.Hearts
-    card.get.face shouldBe Face.Ace
     deckOfCards.deck.length shouldBe 51
   }
 

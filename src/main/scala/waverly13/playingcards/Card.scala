@@ -6,7 +6,7 @@ package waverly13.playingcards
   * @param face: [[waverly13.playingcards.Card]] the face value of the card
   */
 case class Card(suit: Suit.Value, face: Face.Value) {
-
+  // card can not have a null suit or face value
   require(suit != null, "Suit can not be null")
   require(face != null, "Face can not be null")
 
