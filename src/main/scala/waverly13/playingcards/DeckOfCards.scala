@@ -11,18 +11,18 @@ import scala.util.Random
 class DeckOfCards() extends Logging {
 
   /**
-    * the ordered list of cards
+    * The ordered list of cards
     */
   var deck: ArrayBuffer[Card] =
-    Suit.values.flatMap(suite =>
+    Suit.values.flatMap(suit =>
       Face.values.map(face =>
-        Card(suite, face)
+        Card(suit, face)
       )
     ).to[ArrayBuffer]
   logger.debug("Created a DeckOfCards")
 
   /**
-    * Randomly reorders the deck of cards
+    * Randomly reorders the deck of cards by removing cards from the deck and placing them in a new deck
     */
   def shuffle(): Unit = {
     val random: Random = new scala.util.Random
@@ -30,8 +30,8 @@ class DeckOfCards() extends Logging {
     for (i <- deck.length until 0 by -1) {
       newDeck += deck.remove(random.nextInt(i))
     }
-    logger.debug(s"Deck shuffled: $deck")
     deck = newDeck
+    logger.debug(s"Deck shuffled: $deck")
   }
 
   /**
@@ -40,8 +40,9 @@ class DeckOfCards() extends Logging {
     */
   def dealOneCard(): Option[Card] = {
     try {
+      val card = Some(deck.remove(0))
       logger.debug(s"One card dealt, ${deck.length} remaining")
-      Some(deck.remove(0))
+      card
     } catch {
       case e: IndexOutOfBoundsException =>
         // if there are no cards remaining in the deck log and return none

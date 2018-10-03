@@ -61,8 +61,8 @@ class DeckOfCardsTest extends FlatSpec with Matchers {
   it should "return no card if the deck is empty" in {
     val deckOfCards: DeckOfCards = new DeckOfCards()
     (0 to 51).foreach(_ => deckOfCards.dealOneCard())
-    val card = deckOfCards.dealOneCard()
-    card.isEmpty shouldBe true
+    val card: Option[Card] = deckOfCards.dealOneCard()
+    card shouldBe None
   }
 
 }

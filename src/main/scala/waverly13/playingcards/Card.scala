@@ -2,7 +2,7 @@ package waverly13.playingcards
 
 /**
   * A single playing card, made up of its suit and face value
-  * @param suit: [[waverly13.playingcards.Suit]] the suite of the card
+  * @param suit: [[waverly13.playingcards.Suit]] the suit of the card
   * @param face: [[waverly13.playingcards.Card]] the face value of the card
   */
 case class Card(suit: Suit.Value, face: Face.Value) {

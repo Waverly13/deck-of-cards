@@ -8,9 +8,9 @@
 ### Getting Started
 
 * Clone the repository
-* File > New > Project From Existing Sources...
+* `File > New > Project From Existing Sources...`
 * Navigate to the folder with the project and click 'Ok'.
-* Import project from external model > sbt
+* `Import project from external model > sbt`
 * Leave the default options and click 'Finish'.
 
 ### Running Tests
