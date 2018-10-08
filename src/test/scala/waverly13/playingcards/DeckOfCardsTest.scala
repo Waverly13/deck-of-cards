@@ -65,4 +65,34 @@ class DeckOfCardsTest extends FlatSpec with Matchers {
     card shouldBe None
   }
 
+  it should "sort a deck of cards based on face value" in {
+    val deckOfCards: DeckOfCards = new DeckOfCards()
+    deckOfCards.sortByFace()
+    deckOfCards.deck.length shouldBe 52
+    deckOfCards.dealOneCard().get shouldBe Card(Suit.Spades, Face.King)
+    deckOfCards.dealOneCard().get shouldBe Card(Suit.Hearts, Face.King)
+    deckOfCards.dealOneCard().get shouldBe Card(Suit.Diamonds, Face.King)
+    deckOfCards.dealOneCard().get shouldBe Card(Suit.Clubs, Face.King)
+    (0 to 43).foreach(_ => deckOfCards.dealOneCard())
+    deckOfCards.dealOneCard().get shouldBe Card(Suit.Spades, Face.Ace)
+    deckOfCards.dealOneCard().get shouldBe Card(Suit.Hearts, Face.Ace)
+    deckOfCards.dealOneCard().get shouldBe Card(Suit.Diamonds, Face.Ace)
+    deckOfCards.dealOneCard().get shouldBe Card(Suit.Clubs, Face.Ace)
+  }
+
+  it should "sort a deck of cards based on suit value" in {
+    val deckOfCards: DeckOfCards = new DeckOfCards()
+    deckOfCards.sortBySuit()
+    deckOfCards.deck.length shouldBe 52
+    deckOfCards.dealOneCard().get shouldBe Card(Suit.Spades, Face.King)
+    deckOfCards.dealOneCard().get shouldBe Card(Suit.Spades, Face.Queen)
+    deckOfCards.dealOneCard().get shouldBe Card(Suit.Spades, Face.Jack)
+    deckOfCards.dealOneCard().get shouldBe Card(Suit.Spades, Face.Ten)
+    (0 to 43).foreach(_ => deckOfCards.dealOneCard())
+    deckOfCards.dealOneCard().get shouldBe Card(Suit.Clubs, Face.Four)
+    deckOfCards.dealOneCard().get shouldBe Card(Suit.Clubs, Face.Three)
+    deckOfCards.dealOneCard().get shouldBe Card(Suit.Clubs, Face.Two)
+    deckOfCards.dealOneCard().get shouldBe Card(Suit.Clubs, Face.Ace)
+  }
+
 }

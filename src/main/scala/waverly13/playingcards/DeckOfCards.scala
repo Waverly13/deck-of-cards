@@ -52,4 +52,79 @@ class DeckOfCards() extends Logging {
     }
   }
 
+  /**
+    * Sort the deck first by Face value and then by Suit
+    */
+  def sortByFace(): Unit = deck = mergeSort(deck)
+
+  private def mergeSort(cards: ArrayBuffer[Card]): ArrayBuffer[Card] = {
+
+    def merge(firstHalf: ArrayBuffer[Card], secondHalf: ArrayBuffer[Card]): ArrayBuffer[Card] = {
+      if (firstHalf.isEmpty) secondHalf
+      else if (secondHalf.isEmpty) firstHalf
+      else if (firstHalf.head.compareToFace(secondHalf.head) == 1) {
+        firstHalf.head +=: merge(firstHalf.drop(1), secondHalf)
+      } else {
+        secondHalf.head +=: merge(firstHalf, secondHalf.drop(1))
+      }
+    }
+
+    // if the array is of length 1 then the recursive step is done so return the value
+    if (cards.length > 1) {
+      // split the array into two pieces and run the sort of the two parts
+      val mid: Int = cards.length / 2
+      val split = cards.splitAt(mid)
+
+      // split into smallest unit
+      val firstHalf = mergeSort(split._1)
+      val secondHalf = mergeSort(split._2)
+
+      // start putting units back together
+      merge(firstHalf, secondHalf)
+
+    } else {
+      cards
+    }
+
+  }
+
+  /**
+    * Sort the deck first by Suit and then by Face value
+    */
+  def sortBySuit(): Unit = deck = quickSortSuit(deck, 0, deck.length-1)
+
+  private def quickSortSuit(array: ArrayBuffer[Card], left: Int, right: Int): ArrayBuffer[Card] = {
+
+    def partition(partArray: ArrayBuffer[Card], left: Int, right: Int): Int = {
+      val pivot = partArray(right)
+      var i = left - 1
+
+      for (j <- left until right) {
+        if (partArray(j).compareToSuit(pivot) == 1) {
+          // swap values around the pivot
+          i += 1
+          val temp = partArray(i)
+          partArray(i) = partArray(j)
+          partArray(j) = temp
+        }
+      }
+
+      // swap the pivot
+      val temp = partArray(i+1)
+      partArray(i+1) = partArray(right)
+      partArray(right) = temp
+
+      i += 1
+      i
+    }
+
+    if (left < right) {
+      val part: Int = partition(array, left, right)
+      quickSortSuit(array, left, part-1)
+      quickSortSuit(array, part+1, right)
+    }
+
+    array
+
+  }
 }
