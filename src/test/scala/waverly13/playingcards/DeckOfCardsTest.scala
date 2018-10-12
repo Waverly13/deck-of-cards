@@ -67,7 +67,7 @@ class DeckOfCardsTest extends FlatSpec with Matchers {
 
   it should "sort a deck of cards based on face value" in {
     val deckOfCards: DeckOfCards = new DeckOfCards()
-    deckOfCards.sort(deckOfCards.compareToFace)
+    deckOfCards.sort(Card.compareToFace)
     deckOfCards.deck.length shouldBe 52
     deckOfCards.dealOneCard().get shouldBe Card(Suit.Spades, Face.King)
     deckOfCards.dealOneCard().get shouldBe Card(Suit.Hearts, Face.King)
@@ -82,7 +82,7 @@ class DeckOfCardsTest extends FlatSpec with Matchers {
 
   it should "sort a deck of cards based on suit value" in {
     val deckOfCards: DeckOfCards = new DeckOfCards()
-    deckOfCards.sort(deckOfCards.compareToSuit)
+    deckOfCards.sort(Card.compareToSuit)
     deckOfCards.deck.length shouldBe 52
     deckOfCards.dealOneCard().get shouldBe Card(Suit.Spades, Face.King)
     deckOfCards.dealOneCard().get shouldBe Card(Suit.Spades, Face.Queen)

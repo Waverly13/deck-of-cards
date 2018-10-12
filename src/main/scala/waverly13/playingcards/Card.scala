@@ -17,7 +17,7 @@ case class Card(suit: Suit.Value, face: Face.Value) {
   override def toString: String = face + " of " + suit
 
   /**
-    *
+    * Check that this card has the same face and suit as that card
     * @param that: object to be compared
     * @return Boolean true if equal, false if not
     */
@@ -28,36 +28,45 @@ case class Card(suit: Suit.Value, face: Face.Value) {
     }
   }
 
+}
+
+/**
+  * Companion object for card, contains comparison functions
+  */
+object Card {
+
   /**
-    * Compare two cards, first based on face value and if equal then based on suit
-    * @param that: Card the card to be compared to this card
-    * @return 0 if equal, -1 is this is less than that, 1 if this is greater than that
+    * Compare cards based on face value first and then suit
+    * @param first: Card
+    * @param second: Card
+    * @return Int: 0 if equal, -1 is first is less than second, 1 if first is greater than second
     */
-  def compareToFace(that: Card): Int = {
-    if (equals(that)) 0
+  def compareToFace(first: Card, second: Card): Int = {
+    if (first.equals(second)) 0
     else {
-      if (this.face == that.face) {
-        if (this.suit > that.suit) 1
+      if (first.face == second.face) {
+        if (first.suit > second.suit) 1
         else -1
       }
-      else if (this.face > that.face) 1
+      else if (first.face > second.face) 1
       else -1
     }
   }
 
   /**
-    * Compare two cards, first based on suit value and if equal then based on face
-    * @param that: Card the card to be compared to this card
-    * @return 0 if equal, -1 is this is less than that, 1 if this is greater than that
+    * Compare cards based on suit value and then face
+    * @param first: Card
+    * @param second: Card
+    * @return Int: 0 if equal, -1 is first is less than second, 1 if first is greater than second
     */
-  def compareToSuit(that: Card): Int = {
-    if (equals(that)) 0
+  def compareToSuit(first: Card, second: Card): Int = {
+    if (first.equals(second)) 0
     else {
-      if (this.suit == that.suit) {
-        if (this.face > that.face) 1
+      if (first.suit == second.suit) {
+        if (first.face > second.face) 1
         else -1
       }
-      else if (this.suit > that.suit) 1
+      else if (first.suit > second.suit) 1
       else -1
     }
   }

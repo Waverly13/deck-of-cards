@@ -94,40 +94,4 @@ class DeckOfCards() extends Logging {
 
   }
 
-  /**
-    * Compare cards based on face value first and then suit
-    * @param first: Card
-    * @param second: Card
-    * @return Int: 0 if equal, -1 is first is less than second, 1 if first is greater than second
-    */
-  def compareToFace(first: Card, second: Card): Int = {
-    if (equals(second)) 0
-    else {
-      if (first.face == second.face) {
-        if (first.suit > second.suit) 1
-        else -1
-      }
-      else if (first.face > second.face) 1
-      else -1
-    }
-  }
-
-  /**
-    * Compare cards based on suit value and then face
-    * @param first: Card
-    * @param second: Card
-    * @return Int: 0 if equal, -1 is first is less than second, 1 if first is greater than second
-    */
-  def compareToSuit(first: Card, second: Card): Int = {
-    if (equals(second)) 0
-    else {
-      if (first.suit == second.suit) {
-        if (first.face > second.face) 1
-        else -1
-      }
-      else if (first.suit > second.suit) 1
-      else -1
-    }
-  }
-
 }

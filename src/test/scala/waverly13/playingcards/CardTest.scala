@@ -5,8 +5,8 @@ import org.scalatest._
 class CardTest extends FlatSpec with Matchers {
 
   "A card" should "print correctly" in {
-      val card = Card(Suit.Clubs, Face.Ace)
-      card.toString shouldEqual "Ace of Clubs"
+    val card = Card(Suit.Clubs, Face.Ace)
+    card.toString shouldEqual "Ace of Clubs"
   }
 
   it should "be able to have all 4 suits" in {
@@ -56,30 +56,30 @@ class CardTest extends FlatSpec with Matchers {
 
   it should "be able to compare two cards based on face and then suit value" in {
     // this is greater than that with both suit and face
-    Card(Suit.Spades, Face.King).compareToFace(Card(Suit.Clubs, Face.Ace)) shouldBe 1
+    Card.compareToFace(Card(Suit.Spades, Face.King), Card(Suit.Clubs, Face.Ace)) shouldBe 1
     // this is equal to that
-    Card(Suit.Hearts, Face.Seven).compareToFace(Card(Suit.Hearts, Face.Seven)) shouldBe 0
+    Card.compareToFace(Card(Suit.Hearts, Face.Seven), Card(Suit.Hearts, Face.Seven)) shouldBe 0
     // this is greater with same suit
-    Card(Suit.Diamonds, Face.Jack).compareToFace(Card(Suit.Diamonds, Face.Ten)) shouldBe 1
+    Card.compareToFace(Card(Suit.Diamonds, Face.Jack), Card(Suit.Diamonds, Face.Ten)) shouldBe 1
     // this is less than with same face
-    Card(Suit.Diamonds, Face.Four).compareToFace(Card(Suit.Hearts, Face.Four)) shouldBe -1
+    Card.compareToFace(Card(Suit.Diamonds, Face.Four), Card(Suit.Hearts, Face.Four)) shouldBe -1
     // this is less than that with both suit and face
-    Card(Suit.Diamonds, Face.Three).compareToFace(Card(Suit.Hearts, Face.Nine)) shouldBe -1
-    Card(Suit.Hearts, Face.Three).compareToFace(Card(Suit.Diamonds, Face.Nine)) shouldBe -1
+    Card.compareToFace(Card(Suit.Diamonds, Face.Three), Card(Suit.Hearts, Face.Nine)) shouldBe -1
+    Card.compareToFace(Card(Suit.Hearts, Face.Three), Card(Suit.Diamonds, Face.Nine)) shouldBe -1
   }
 
   it should "be able to compare two cards based on suit and then face value" in {
     // this is greater than that with both suit and face
-    Card(Suit.Spades, Face.King).compareToSuit(Card(Suit.Clubs, Face.Ace)) shouldBe 1
+    Card.compareToSuit(Card(Suit.Spades, Face.King), Card(Suit.Clubs, Face.Ace)) shouldBe 1
     // this is equal to that
-    Card(Suit.Hearts, Face.Seven).compareToSuit(Card(Suit.Hearts, Face.Seven)) shouldBe 0
+    Card.compareToSuit(Card(Suit.Hearts, Face.Seven), Card(Suit.Hearts, Face.Seven)) shouldBe 0
     // this is greater with same suit
-    Card(Suit.Diamonds, Face.Jack).compareToSuit(Card(Suit.Diamonds, Face.Ten)) shouldBe 1
+    Card.compareToSuit(Card(Suit.Diamonds, Face.Jack), Card(Suit.Diamonds, Face.Ten)) shouldBe 1
     // this is less than with same face
-    Card(Suit.Diamonds, Face.Four).compareToSuit(Card(Suit.Hearts, Face.Four)) shouldBe -1
+    Card.compareToSuit(Card(Suit.Diamonds, Face.Four), Card(Suit.Hearts, Face.Four)) shouldBe -1
     // this is less than that with both suit and face
-    Card(Suit.Hearts, Face.Three).compareToSuit(Card(Suit.Diamonds, Face.Nine)) shouldBe 1
-    Card(Suit.Diamonds, Face.Three).compareToSuit(Card(Suit.Hearts, Face.Nine)) shouldBe -1
+    Card.compareToSuit(Card(Suit.Hearts, Face.Three), Card(Suit.Diamonds, Face.Nine)) shouldBe 1
+    Card.compareToSuit(Card(Suit.Diamonds, Face.Three), Card(Suit.Hearts, Face.Nine)) shouldBe -1
   }
 
 }
