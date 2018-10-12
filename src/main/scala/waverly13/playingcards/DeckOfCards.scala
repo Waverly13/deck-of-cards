@@ -53,54 +53,20 @@ class DeckOfCards() extends Logging {
   }
 
   /**
-    * Sort the deck first by Face value and then by Suit
+    * Sort the deck of cards based on the comparator passed in
+    * @param compare: (Card, Card) => Int the function that compare the two cards, will return 1 if the first card
+    *               is greater than the second
     */
-  def sortByFace(): Unit = deck = mergeSort(deck)
+  def sort(compare: (Card, Card) => Int): Unit = quickSort(deck, 0, deck.length-1, compare)
 
-  private def mergeSort(cards: ArrayBuffer[Card]): ArrayBuffer[Card] = {
-
-    def merge(firstHalf: ArrayBuffer[Card], secondHalf: ArrayBuffer[Card]): ArrayBuffer[Card] = {
-      if (firstHalf.isEmpty) secondHalf
-      else if (secondHalf.isEmpty) firstHalf
-      else if (firstHalf.head.compareToFace(secondHalf.head) == 1) {
-        firstHalf.head +=: merge(firstHalf.drop(1), secondHalf)
-      } else {
-        secondHalf.head +=: merge(firstHalf, secondHalf.drop(1))
-      }
-    }
-
-    // if the array is of length 1 then the recursive step is done so return the value
-    if (cards.length > 1) {
-      // split the array into two pieces and run the sort of the two parts
-      val mid: Int = cards.length / 2
-      val split = cards.splitAt(mid)
-
-      // split into smallest unit
-      val firstHalf = mergeSort(split._1)
-      val secondHalf = mergeSort(split._2)
-
-      // start putting units back together
-      merge(firstHalf, secondHalf)
-
-    } else {
-      cards
-    }
-
-  }
-
-  /**
-    * Sort the deck first by Suit and then by Face value
-    */
-  def sortBySuit(): Unit = deck = quickSortSuit(deck, 0, deck.length-1)
-
-  private def quickSortSuit(array: ArrayBuffer[Card], left: Int, right: Int): ArrayBuffer[Card] = {
+  private def quickSort(array: ArrayBuffer[Card], left: Int, right: Int, compare: (Card, Card) => Int): ArrayBuffer[Card] = {
 
     def partition(partArray: ArrayBuffer[Card], left: Int, right: Int): Int = {
       val pivot = partArray(right)
       var i = left - 1
 
       for (j <- left until right) {
-        if (partArray(j).compareToSuit(pivot) == 1) {
+        if (compare(partArray(j), pivot) == 1) {
           // swap values around the pivot
           i += 1
           val temp = partArray(i)
@@ -120,11 +86,48 @@ class DeckOfCards() extends Logging {
 
     if (left < right) {
       val part: Int = partition(array, left, right)
-      quickSortSuit(array, left, part-1)
-      quickSortSuit(array, part+1, right)
+      quickSort(array, left, part-1, compare)
+      quickSort(array, part+1, right, compare)
     }
 
     array
 
   }
+
+  /**
+    * Compare cards based on face value first and then suit
+    * @param first: Card
+    * @param second: Card
+    * @return Int: 0 if equal, -1 is first is less than second, 1 if first is greater than second
+    */
+  def compareToFace(first: Card, second: Card): Int = {
+    if (equals(second)) 0
+    else {
+      if (first.face == second.face) {
+        if (first.suit > second.suit) 1
+        else -1
+      }
+      else if (first.face > second.face) 1
+      else -1
+    }
+  }
+
+  /**
+    * Compare cards based on suit value and then face
+    * @param first: Card
+    * @param second: Card
+    * @return Int: 0 if equal, -1 is first is less than second, 1 if first is greater than second
+    */
+  def compareToSuit(first: Card, second: Card): Int = {
+    if (equals(second)) 0
+    else {
+      if (first.suit == second.suit) {
+        if (first.face > second.face) 1
+        else -1
+      }
+      else if (first.suit > second.suit) 1
+      else -1
+    }
+  }
+
 }
